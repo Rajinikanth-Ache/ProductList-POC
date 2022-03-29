@@ -1,0 +1,61 @@
+<nav class="navbar navbar-light ">
+    <div class="container-fluid">
+        <h2>Products</h2>
+        <div class="d-flex">
+          <input type="text" name="productName" placeholder="enter product name" [(ngModel)]="productName" (ngModelChange)="search()">
+            <a routerLink="/add-product"> <button class="btn btn-info mx-3" type="button">Add Product</button></a> 
+        </div>
+    </div>
+</nav>
+
+<table class="table table-hover">
+    <thead>
+      <tr class="table-primary">
+        <th scope="col">Id</th>
+        <th scope="col">Name</th>
+        <th scope="col">Price</th>
+        <th scope="col">Details</th>
+        <th scope="col">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let prod of products">
+            <td>{{prod.productId}} &nbsp;</td>
+            <td>{{prod.productName}} &nbsp;</td>
+            <td>{{prod.productPrice}} &nbsp;</td>
+            <td>
+                <a [routerLink]="['/product',prod.productId]"> <button class="btn btn-info" type="button">View</button></a> 
+                
+            </td>
+            <td>
+              <button class="btn btn-info" (click)="edit(prod)" type="button">Edit</button>
+              <button  class="btn btn-danger mx-3" type="button" (click)="delete(prod)" data-bs-toggle="modal" data-bs-target="#productDeleteModal">Delete</button>
+            </td>
+        </tr>
+      </tbody>
+      
+</table>
+
+
+ <!-- delete product -->
+ <div class="modal fade" id="productDeleteModal" tabindex="-1" aria-labelledby="productDeleteModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="productDeleteModalLabel">Delete Product</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+         <h6><small>Arey you sure to delete product?</small></h6>
+      </div>
+      <div class="modal-footer">
+        <button type="button"  id="cancel3" class="btn btn-secondary" data-bs-dismiss="modal">cancel</button>
+        <button type="button" (click)="deletedata()" class="btn btn-primary">Delete</button>
+      </div>
+    </div>
+  </div>
+</div> 
+
+
+
+

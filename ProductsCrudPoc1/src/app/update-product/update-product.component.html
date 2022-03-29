@@ -1,0 +1,68 @@
+
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="productUpdateModalLabel">Update Product Details</h5>
+          <button type="button" (click)="cancelBtn()" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <form [formGroup]="productP">
+                 <div class="mb-3">
+                  <label for="productId" class="form-label">Product Id</label>
+                  <input type="number" formControlName="productId" class="form-control" id="productId" readonly>
+                </div>
+               <div class="mb-3">
+                  <label for="productName" class="form-label">Product Name</label>
+                  <input type="text" formControlName="productName" class="form-control" id="productName">
+                  <div *ngIf="productP.controls.productName.errors && (productP.controls.productName.dirty || productP.controls.productName.touched)">
+                    <div class="text-danger" *ngIf="productP.controls.productName.errors.required">
+                        Name is required
+                    </div>
+                </div>
+                </div>
+                <div class="mb-3">
+                  <label for="productPrice" class="form-label">Product Price</label>
+                  <input type="number" formControlName="productPrice" class="form-control" id="productPrice" >
+                  <div *ngIf="productP.controls.productPrice.errors && (productP.controls.productPrice.dirty || productP.controls.productPrice.touched)">
+                    <div class="text-danger" *ngIf="productP.controls.productPrice.errors.required">
+                        price is required
+                    </div>
+                </div>
+                </div>
+                <div class="mb-3">
+                  <label for="brandName" class="form-label">Brand Name</label>
+                  <input type="text" formControlName="brandName" class="form-control" id="brandName">
+                  <div *ngIf="productP.controls.brandName.errors && (productP.controls.brandName.dirty || productP.controls.brandName.touched)">
+                    <div class="text-danger" *ngIf="productP.controls.brandName.errors.required">
+                        brand name is required
+                    </div>
+                </div>
+                </div>
+                 <div class="mb-3">
+                  <label for="manufactureDate" class="form-label">Manufatcure Date</label>
+                  <input type="date" formControlName="manufactureDate" class="form-control" id="manufactureDate">
+                  <div *ngIf="productP.controls.manufactureDate.errors && (productP.controls.manufactureDate.dirty || productP.controls.manufactureDate.touched)">
+                    <div class="text-danger" *ngIf="productP.controls.manufactureDate.errors.required">
+                        manufacture date is required
+                    </div>
+                </div>
+                </div>
+                 <div class="mb-3">
+                  <label for="expiryDate" class="form-label">Expiry Date</label>
+                  <input type="date" formControlName="expiryDate" class="form-control" id="expiryDate">
+                  <div *ngIf="productP.controls.expiryDate.errors && (productP.controls.expiryDate.dirty || productP.controls.expiryDate.touched)">
+                    <div class="text-danger" *ngIf="productP.controls.expiryDate.errors.required">
+                        expiry date is required
+                    </div>
+                </div>
+                <div class="text-danger" *ngIf="productP.controls.expiryDate.hasError('expirydateLess')">Expiry date must be greater than Manufacture date</div>
+                    
+                </div>
+              </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" (click)="cancelBtn()" id="cancel2" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" (click)="update()" [disabled]="productP.invalid" class="btn btn-primary">Update</button>
+        </div>
+      </div>
+    </div>

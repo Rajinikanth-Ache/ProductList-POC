@@ -14,6 +14,7 @@ export class ProductsComponent implements OnInit {
 
   productP!:FormGroup
 
+  productName!:string
   ngOnInit() {
     this.getProducts();
 
@@ -24,15 +25,16 @@ export class ProductsComponent implements OnInit {
      brandName:['',Validators.required],
      manufactureDate:['',Validators.required],
      expiryDate:['',Validators.required]
-   })
+   }, {validator: this.dateLessThan('manufactureDate', 'expiryDate')})
   }
-  products:any=[]
+  products!:Product[]
 
   getProducts(){
     this.serv.get().subscribe(data=>{
       this.products=data;
     })
   }
+
 
   edit(prod:Product){
     this.productP.controls['productId'].setValue(prod.productId);
@@ -90,5 +92,33 @@ export class ProductsComponent implements OnInit {
   cancelBtn(){
     this.productP.reset();
   }
+
+  dateLessThan(manufactureDate: string, expiryDate: string) {
+    return (group: FormGroup) => {
+      let f = group.controls[manufactureDate];
+      let t = group.controls[expiryDate];
+      if ( (f.value > t.value)){
+       t.setErrors({expirydateLess:true})
+      }else{
+        t.setErrors(null)
+      }
+    }
+}
+
+search(){
+  if(this.productName==''){
+  
+    this.ngOnInit()
+
+  }else{
+
+    this.products = this.products.filter(res=>{
+
+      return res.productName.toLocaleLowerCase().match(this.productName.toLocaleLowerCase());
+
+    })
+
+  }
+}
 
 }

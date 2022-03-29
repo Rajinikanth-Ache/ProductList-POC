@@ -2,7 +2,8 @@
     <div class="container-fluid">
         <h2>Products</h2>
         <div class="d-flex">
-          <button class="btn btn-success" type="button" data-bs-toggle="modal" data-bs-target="#productAddModal">Add Product</button>
+          <input type="text" name="productName" placeholder="enter product name" [(ngModel)]="productName" (ngModelChange)="search()">
+          <button class="btn btn-success mx-3" type="button" data-bs-toggle="modal" data-bs-target="#productAddModal">Add Product</button>
         </div>
     </div>
 </nav>
@@ -78,19 +79,25 @@
                 </div>
                  <div class="mb-3">
                   <label for="manufactureDate" class="form-label">Manufatcure Date</label>
-                  <input type="date" formControlName="manufactureDate" class="form-control" id="manufactureDate">
+                  <input type="date" formControlName="manufactureDate" class="form-control" id="manufactureDate" >
                   <div *ngIf="productP.controls.manufactureDate.errors && (productP.controls.manufactureDate.dirty || productP.controls.manufactureDate.touched)">
                     <div class="text-danger" *ngIf="productP.controls.manufactureDate.errors.required">
                         manufacture date is required
                     </div>
+                    <!-- <div class="text-danger" *ngIf="productP.controls.manufactureDate.errors.expirydateLess">
+                      manufacture date must be less than expiry date
+                  </div> -->
                 </div>
                 </div>
                  <div class="mb-3">
                   <label for="expiryDate" class="form-label">Expiry Date</label>
-                  <input type="date" formControlName="expiryDate" class="form-control" id="expiryDate">
-                  <div *ngIf="productP.controls.expiryDate.errors && (productP.controls.expiryDate.dirty || productP.controls.expiryDate.touched)">
+                  <input type="date" formControlName="expiryDate" class="form-control" id="expiryDate" >
+                  <div *ngIf="productP.controls.expiryDate.errors && (productP.controls.expiryDate.dirty || productP.controls.expiryDate.touched) ">
                     <div class="text-danger" *ngIf="productP.controls.expiryDate.errors.required">
                         expiry date is required
+                    </div>
+                    <div class="text-danger" *ngIf="productP.controls.expiryDate.errors.expirydateLess"> 
+                        Expiry date must be greater than Manufacture date
                     </div>
                 </div>
                 </div>
@@ -148,11 +155,24 @@
                 </div>
                  <div class="mb-3">
                   <label for="manufactureDate" class="form-label">Manufatcure Date</label>
-                  <input type="date" formControlName="manufactureDate" class="form-control" id="manufactureDate">
+                  <input type="date" formControlName="manufactureDate" class="form-control" id="manufactureDate" >
+                  <div *ngIf="productP.controls.manufactureDate.errors && (productP.controls.manufactureDate.dirty || productP.controls.manufactureDate.touched)">
+                    <div class="text-danger" *ngIf="productP.controls.manufactureDate.errors.required">
+                        manufacture date is required
+                    </div>
+                </div>
                 </div>
                  <div class="mb-3">
                   <label for="expiryDate" class="form-label">Expiry Date</label>
-                  <input type="date" formControlName="expiryDate" class="form-control" id="expiryDate">
+                  <input type="date" formControlName="expiryDate" class="form-control" id="expiryDate" >
+                  <div *ngIf="productP.controls.expiryDate.errors && (productP.controls.expiryDate.dirty || productP.controls.expiryDate.touched)">
+                    <div class="text-danger" *ngIf="productP.controls.expiryDate.errors.required">
+                        expiry date is required
+                    </div>
+                    <div class="text-danger" *ngIf="productP.controls.expiryDate.errors.expirydateLess"> 
+                        Expiry date must be greater than Manufacture date
+                    </div>
+                </div>
                 </div>
               </form>
         </div>
